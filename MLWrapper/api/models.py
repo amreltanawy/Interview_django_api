@@ -1,4 +1,5 @@
 from django.db import models
+from jsonfield import JSONField
 
 # Create your models here.
 
@@ -26,6 +27,13 @@ class FeatureSet(models.Model):
     sexo = models.CharField(max_length=1, choices=sexo_choices, default='O')
     ind_nuevo = models.IntegerField(choices=ind_nuevo_choices,default=2)
 
+    def __str__(self):
+        return str(self.id)
+
 
 class PredictionResult(models.Model):
-    pass
+    feature_set = models.ForeignKey('FeatureSet', blank=False, on_delete=models.CASCADE)
+    result = JSONField()
+
+    def __str__(self):
+        return str(self.id)
