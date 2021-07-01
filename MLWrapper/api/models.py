@@ -95,7 +95,9 @@ class FeatureSet(models.Model):
     tiprel_1mes = models.CharField(max_length=1,choices=tiprel_1mes_choices, default='O')
     indrel_1mes = models.CharField(max_length=1, choices=indrel_1mes_choices, default='O')
     indrel = models.IntegerField(choices=indrel_choices, default=2)
-    
+    age = models.FloatField(default=20)
+    customer_seniority = models.FloatField(default=0)
+    rent = models.FloatField(default=101850)
     def __str__(self):
         return str(self.id)
 
