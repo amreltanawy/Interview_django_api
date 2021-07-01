@@ -29,9 +29,10 @@ SchemaView = get_schema_view(API_INFO, public=True)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', SchemaView.without_ui(cache_timeout=0)),
     path('swagger/', login_required(SchemaView.with_ui('swagger', cache_timeout=1))),
     path('redoc/', login_required(SchemaView.with_ui('redoc', cache_timeout=1))),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),   
     path('', include('django.contrib.auth.urls')),
 ]
