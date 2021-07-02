@@ -31,7 +31,7 @@ class PridctionViewSet(viewsets.ModelViewSet):
     """
     queryset = FeatureSet.objects.all()
     serializer_class = FeatureSetSerializer
-    http_method_names = ["get", "post", "put", "delete"]
+    http_method_names = ["post"]
 
     def get_permissions(self):
         if  self.action == 'destroy':
