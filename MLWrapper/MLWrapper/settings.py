@@ -131,6 +131,10 @@ SWAGGER_SETTINGS = {
     'LOGIN_URL': 'rest_framework:login'
 }
 
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
+AUTH_USER_MODEL = 'api.User'
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
