@@ -1,5 +1,6 @@
 from django.db import models
-from jsonfield import JSONField
+from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
 
@@ -104,7 +105,58 @@ class FeatureSet(models.Model):
 
 class PredictionResult(models.Model):
     feature_set = models.ForeignKey('FeatureSet', blank=False, on_delete=models.CASCADE)
-    result = JSONField()
+    ind_ahor_fin_ult1= models.FloatField(default=0)
+    ind_aval_fin_ult1= models.FloatField(default=0)
+    ind_cco_fin_ult1= models.FloatField(default=0)
+    ind_cder_fin_ult1= models.FloatField(default=0)
+    ind_cno_fin_ult1= models.FloatField(default=0)
+    ind_ctju_fin_ult1= models.FloatField(default=0)
+    ind_ctma_fin_ult1= models.FloatField(default=0)
+    ind_ctop_fin_ult1= models.FloatField(default=0)
+    ind_ctpp_fin_ult1= models.FloatField(default=0)
+    ind_deco_fin_ult1= models.FloatField(default=0)
+    ind_deme_fin_ult1= models.FloatField(default=0)
+    ind_dela_fin_ult1= models.FloatField(default=0)
+    ind_ecue_fin_ult1= models.FloatField(default=0)
+    ind_fond_fin_ult1= models.FloatField(default=0)
+    ind_hip_fin_ult1= models.FloatField(default=0)
+    ind_plan_fin_ult1= models.FloatField(default=0)
+    ind_pres_fin_ult1= models.FloatField(default=0)
+    ind_reca_fin_ult1= models.FloatField(default=0)
+    ind_tjcr_fin_ult1= models.FloatField(default=0)
+    ind_valo_fin_ult1= models.FloatField(default=0)
+    ind_viv_fin_ult1= models.FloatField(default=0)
+    ind_nomina_ult1= models.FloatField(default=0)
+    ind_nom_pens_ult1= models.FloatField(default=0)
+    ind_recibo_ult1= models.FloatField(default=0)
 
     def __str__(self):
         return str(self.id)
+
+
+class User(AbstractUser):
+    """
+    Overriding Abstract User
+    """
+    SUPER_ADMIN = 1
+    STAFF = 2
+    USER = 3
+
+    USER_ROLE = (
+        (SUPER_ADMIN, "super_admin"),
+        (STAFF, 'staff'),
+        (USER, 'user')
+    )
+    first_name = models.CharField(max_length=250, null=True, blank=True)
+    last_name = models.CharField(max_length=250, null=True, blank=True)
+    role = models.PositiveSmallIntegerField(choices=USER_ROLE, default=3)
+    username = models.EmailField(max_length=254, blank=False, null=False, unique=True)
+    email = models.EmailField(max_length=254, blank=False, null=False, unique=True)
+    is_email_verified = models.BooleanField(null=False, blank=False, default=False)
+    is_blocked = models.BooleanField(null=False, blank=False, default=False)
+    meta = JSONField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return str(self.username)
