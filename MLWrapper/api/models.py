@@ -87,7 +87,7 @@ class FeatureSet(models.Model):
     pais_residencia = models.CharField(max_length=2, default='NA')
     canal_entrada = models.CharField(max_length=3, default='NA')
     segmento = models.CharField(max_length=40,choices= segmento_choices,default='default')
-    ind_actividad_cliente = models.IntegerField(choices=segmento_choices,default=2)
+    ind_actividad_cliente = models.IntegerField(choices=ind_actividad_cliente_choices,default=2)
     tipodom = models.IntegerField(choices=tipodom_choices,default=0)
     indfall = models.CharField(max_length=1,choices=indfall_choices, default='O')
     conyuemp = models.CharField(max_length=1,choices=conyuemp_choices, default='O')
@@ -154,7 +154,6 @@ class User(AbstractUser):
     email = models.EmailField(max_length=254, blank=False, null=False, unique=True)
     is_email_verified = models.BooleanField(null=False, blank=False, default=False)
     is_blocked = models.BooleanField(null=False, blank=False, default=False)
-    meta = JSONField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
