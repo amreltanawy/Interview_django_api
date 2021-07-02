@@ -7,7 +7,7 @@ from api.serializers import FeatureSetSerializer, PredictionResultSerializer
 
 
 class Predictor():
-    def __init__(self,model_location="../output/generatedModel.pkl"):
+    def __init__(self,model_location="/code/output/generatedModel.pkl"):
         self.model = pickle.load(open(model_location,'rb'))
     
     def predict(self,features_serializer:FeatureSetSerializer):
