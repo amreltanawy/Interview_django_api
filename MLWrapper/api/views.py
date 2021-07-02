@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, status
-from api.serializers import FeatureSetSerializer
+from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
+
+from api.serializers import FeatureSetSerializer, PredictionResultSerializer
 from api.models import FeatureSet, PredictionResult
+from api.Predictor import Predictor
+
 
 
 # Create your views here.
@@ -39,11 +44,19 @@ class PridctionViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
+    @swagger_auto_schema(request_body=FeatureSetSerializer,responses={201:PredictionResultSerializer})
     def create(self, request, *args, **kwargs):
         """
         Create a Prediction given a set of features
         :return:
         returns a list of top 7 Predicted Product recommendations
         """
-        pass
+        serializer = FeatureSetSerializer(data=request.data)
+        # change in model customer_seniority to antiguedad
+        if serializer.is_valid():
+            predictor_instance = Predictor()
+            prediction_serializer_instance = predictor_instance.predict(serializer)
+            return Response(prediction_serializer_instance.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
         
