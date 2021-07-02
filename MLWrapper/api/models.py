@@ -97,7 +97,7 @@ class FeatureSet(models.Model):
     indrel_1mes = models.CharField(max_length=1, choices=indrel_1mes_choices, default='O')
     indrel = models.IntegerField(choices=indrel_choices, default=2)
     age = models.FloatField(default=20)
-    customer_seniority = models.FloatField(default=0)
+    antiguedad = models.FloatField(default=0)
     rent = models.FloatField(default=101850)
     def __str__(self):
         return str(self.id)
@@ -105,8 +105,8 @@ class FeatureSet(models.Model):
 
 class PredictionResult(models.Model):
     feature_set = models.ForeignKey('FeatureSet', blank=False, on_delete=models.CASCADE)
-    ind_ahor_fin_ult1= models.FloatField(default=0)
-    ind_aval_fin_ult1= models.FloatField(default=0)
+    # ind_ahor_fin_ult1= models.FloatField(default=0)
+    # ind_aval_fin_ult1= models.FloatField(default=0)
     ind_cco_fin_ult1= models.FloatField(default=0)
     ind_cder_fin_ult1= models.FloatField(default=0)
     ind_cno_fin_ult1= models.FloatField(default=0)
